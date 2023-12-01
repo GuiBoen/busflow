@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'staticpages.apps.StaticpagesConfig', # adicione esta linha
+    'busflow.apps.BusflowConfig', # adicione esta linha
 ]
 
 MIDDLEWARE = [

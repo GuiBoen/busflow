@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Todos os Pontos</h2>
+<section>
+  <p>
+    Muitos resultados? <a href="{% url 'busflow:search' %}">Buscar Pontos</a>
+  </p>
+</section>
+{% if pontos_list %}
+<section class="lista-de-cards">
+  {% for ponto in pontos_list %}
+  <article class="card">
+    <a href="{% url 'busflow:detail' forloop.counter %}">
+      </a>
+    <p>{{ ponto.nome }} ({{ ponto.lotacao }})</p>
+  </article>
+  {% endfor %}
+</section>
+{% else %}
+<p>Não foi encontrado nenhum ponto.</p>
+{% endif %} {% endblock content %}

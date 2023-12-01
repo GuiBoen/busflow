@@ -1,0 +1,15 @@
+{% extends 'base.html' %} {% block content %}
+<h2>Inserir Lotacao</h2>
+<form method="POST" action="{% url 'busflow:modify' %}">
+  {% csrf_token %}
+  <p>
+    Ponto:
+  </p>
+  <p>
+    <label for="id_lotacao">Lotacao: </label>
+    <set type="number" name="lotacao" id="id_lotacao" />
+  </p>
+  <button type="submit">Modificar Lotação</button>
+</form>
+
+{% endblock content %}

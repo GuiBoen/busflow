@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Busca de Pontos por Nome</h2>
+<form action="{% url 'busflow:search' %}">
+    <p>
+        <label for="id_query">Ponto:</label>
+        <input type="text" name="query" id="id_query" />
+    </p>
+    <button type="submit">Buscar</button>
+</form>
+
+
+<h2>Resultado da Busca</h2>
+{% if pontos_list %}
+<section class="lista-de-cards">
+    {% for ponto in pontos_list %}
+    <article class="card">
+        <p>{{ ponto.nome }} ({{ ponto.lotacao }})</p>
+    </article>
+    {% endfor %}
+</section>
+{% else %}
+<p>Não foi encontrado nenhum ponto para a busca.</p>
+{% endif %}
+
+{% endblock content %}

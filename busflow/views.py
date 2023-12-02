@@ -1,37 +1,56 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 import numpy as np
+from .models import pontos, onibus, usuario
 
-# Create your views here.
 from django.http import HttpResponse
 from .temp_data import busflow_data
 
+
 def detail_ponto(request, ponto_id):
-    context = {'ponto': busflow_data[ponto_id - 1]}
-    return render(request, 'busflow/detail.html', context)
+    ponto = get_object_or_404(pontos, pk=ponto_id)
+    context = {"ponto": ponto}
+    return render(request, "busflow/detail.html", context)
 
 def list_pontos(request):
-    context = {"pontos_list": busflow_data}  #a ver
-    return render(request, 'busflow/index.html', context)
+    pontos_list = pontos.objects.all()
+    context = {"pontos_list": pontos_list}
+    return render(request, "busflow/index.html", context)
+
+
+def list_onibus(request):
+    onibus_list = onibus.objects.all()
+    context = {"onibus_list": onibus_list}
+    return render(request, "busflow/index.html", context)
+
+
+def list_usuarios(request):
+    usuario_list = usuario.objects.all()
+    context = {"usuario_list": usuario_list}
+    return render(request, "busflow/index.html", context)
+
+# def list_pontos(request):
+#     ponto_list
+#     context = {"pontos_list": busflow_data}  #a ver
+#     return render(request, 'busflow/index.html', context)
+
 
 def search_pontos(request):
     context = {}
-    if request.GET.get('query', False):
-        context = {
-            "pontos_list": [
-                m for m in busflow_data
-                if request.GET['query'].lower() in m['nome'].lower()
-            ]
-        }
-    return render(request, 'busflow/search.html', context)
+    if request.GET.get("query", False):
+        search_term = request.GET['query'].lower()
+        pontos_list = pontos.objects.filter(nome__icontains=search_term)
+        context = {"pontos_list": pontos_list}
+    return render(request, "busflow/search.html", context)
 
-list_lotacao=np.zeros(26)
 
-def mediaLotacao(request):
-    ponto_id = request.POST.get('busflow_id')
-    list_lotacao[ponto_id].append(request.POST['lotacao'])
-    media = sum(list_lotacao) / float(len(list_lotacao))
-    return round(media)
-    
+# list_lotacao = np.zeros(26)
+
+
+# def mediaLotacao(request, ponto_id):
+#     list_lotacao[ponto_id].append(request.POST["lotacao"])
+#     media = sum(list_lotacao[ponto_id]) / float(len(list_lotacao[ponto_id]))
+#     return round(media)
+
 
 # def modify_lotacao(request):
 #     if request.method == 'UPDATE':
@@ -43,3 +62,16 @@ def mediaLotacao(request):
 #             reverse('movies:detail', args=(len(movie_data), )))
 #     else:
 #         return render(request, 'movies/create.html', {})
+
+def update_ponto(request, ponto_id):
+    ponto = get_object_or_404(pontos, pk=ponto_id)
+
+    if request.method == "POST":
+        # ponto.lotacao = request.POST['mediaLotacao(request, ponto_id)']
+        ponto.lotacao = request.POST['lotacao']
+        ponto.save()
+        return HttpResponseRedirect(
+            reverse("busflow:detail", args=(ponto.id )))
+    
+    context = {'ponto': ponto}
+    return render(request, 'busflow/update.html', context)

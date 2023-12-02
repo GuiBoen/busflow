@@ -1,12 +1,13 @@
 {% extends 'base.html' %} {% block title %} {{ ponto.nome }} ({{
-      ponto.lotacao }} {% endblock title %} {% block content %}
-      <h2>Detalhes do Ponto {{ ponto.nome }} ({{ ponto.lotacao }})</h2>
-      
-      <section class="dados-de-filme">
-        <ul>
-          <li>Nome: {{ ponto.nome }}</li>
-          <li>Lotação: {{ ponto.lotacao }}</li>
-        </ul>
-      </section>
-      
-      {% endblock content %}
+ponto.lotacao }} {% endblock title %} {% block content %}
+<h2>Detalhes do Ponto {{ ponto.nome }} ({{ ponto.lotacao }})</h2>
+
+<section class="dados-de-ponto">
+  <ul>
+    <li>Nome: {{ ponto.nome }}</li>
+    <li>Lotação: {{ ponto.lotacao }}</li>
+    <li><a href="{% url 'busflow:update' ponto.id %}">Editar lotacao</a></li>
+  </ul>
+</section>
+
+{% endblock content %}

@@ -16,7 +16,9 @@
 <section class="lista-de-cards">
     {% for ponto in pontos_list %}
     <article class="card">
-        <p>{{ ponto.nome }} ({{ ponto.lotacao }})</p>
+        <a href="{% url 'busflow:detail' ponto.id %}">
+            <p>{{ ponto.nome }} ({{ ponto.lotacao }})</p>
+        </a>
     </article>
     {% endfor %}
 </section>

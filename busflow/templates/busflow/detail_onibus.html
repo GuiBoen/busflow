@@ -1,0 +1,16 @@
+{% extends 'base.html' %} {% block title %} {{ bus.id_linha.nome }} ({{bus.lotacao }} {% endblock title %} {% block content %}
+    <h2>Detalhes do  {{ bus.id_linha.nome }}2</h2>
+    
+    <section class="dados-de-onibus">
+      <ul>
+        <li>Nome: {{ bus.id_linha.nome }}</li>
+        <li>Lotação: {{ bus.lotacao }}</li>
+        <li><a href="{% url 'busflow:update_onibus' bus.id %}">Editar lotacao</a></li>
+      </ul>
+    </section>
+    
+    <hr>
+    
+
+    
+    {% endblock content %}

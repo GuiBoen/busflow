@@ -1,5 +1,4 @@
 from django.shortcuts import render, get_object_or_404
-import numpy as np
 from .models import pontos, onibus, usuario
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -53,14 +52,9 @@ t=len(pontos.objects.all())
 for i in range(t):
     list_lotacao.append([])
 def mediaLotacao(lot, ponto_id):
-    print(list_lotacao)
     list_lotacao[ponto_id].append(int(lot))
-    print(list_lotacao)
-    print(sum(list_lotacao[ponto_id]))
-    print(len(list_lotacao[ponto_id]))
     media = sum(list_lotacao[ponto_id]) / len(list_lotacao[ponto_id])
     return round(media)
-
 
 def update_ponto(request, ponto_id):
     ponto = get_object_or_404(pontos, pk=ponto_id)
@@ -74,3 +68,35 @@ def update_ponto(request, ponto_id):
     
     context = {'ponto': ponto}
     return render(request, 'busflow/update.html', context)
+
+
+
+list_lotacao_onibus=[]
+l = len(onibus.objects.all())
+for j in range(l):
+    list_lotacao_onibus.append([])
+
+def mediaLotacao_Onibus(lot_onibus, onibus_id):
+    list_lotacao[onibus_id].append(int(lot_onibus))
+    media_onibus = sum(list_lotacao[onibus_id]) / len(list_lotacao[onibus_id])
+    return round(media_onibus)
+
+def update_onibus(request, onibus_id):
+    bus = get_object_or_404(onibus, pk=onibus_id)
+
+    if request.method == "POST":
+        media = mediaLotacao_Onibus(request.POST['lotacao'], onibus_id)
+        bus.lotacao = media
+        bus.save()
+        return HttpResponseRedirect(
+            reverse("busflow:detail_onibus", args=(bus.id, )))
+    
+    context = {'bus': bus}
+    return render(request, 'busflow/update_onibus.html', context)    
+
+def detail_onibus(request, onibus_id):
+    bus = get_object_or_404(onibus, pk=onibus_id)
+    context = {"bus": bus}
+    return render(request, "busflow/detail_onibus.html", context)
+
+

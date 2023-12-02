@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Atualizar Dados do Onibus {{ bus.id_linha }} ({{ bus.lotacao}})</h2>
+<form method="post" action="{% url 'busflow:update_onibus' bus.id%}">
+  {% csrf_token %}
+  <p>
+    <label for="lotacao">Lotação atual:</label>
+    <input
+      min = 0
+      max = 5
+      type="number"
+      name="lotacao"
+      id="id_lotacao"
+      value="{{ bus.lotacao }}"
+    />
+  </p>
+  <button type="submit">Atualizar</button>
+</form>
+{% endblock content %}

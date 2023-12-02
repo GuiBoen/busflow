@@ -20,7 +20,7 @@ ponto.lotacao }} {% endblock title %} {% block content %}
         {% if  ponto.id_onibus %}
                 <figure>
                     <blockquote>
-                        Proximo onibus: {{ ponto.id_onibus }}
+                        <a href="{% url 'busflow:update_onibus' ponto.id_onibus.id %}">Proximo onibus: {{ ponto.id_onibus }}</a>
                     </blockquote>
                 </figure>
         {% else %}

@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from .models import pontos, onibus, usuario
 from django.http import HttpResponseRedirect
 from django.urls import reverse
-
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from .temp_data import busflow_data
 from django.views import generic
@@ -56,6 +56,7 @@ def mediaLotacao(lot, ponto_id):
     media = sum(list_lotacao[ponto_id]) / len(list_lotacao[ponto_id])
     return round(media)
 
+@login_required
 def update_ponto(request, ponto_id):
     ponto = get_object_or_404(pontos, pk=ponto_id)
 
@@ -81,6 +82,7 @@ def mediaLotacao_Onibus(lot_onibus, onibus_id):
     media_onibus = sum(list_lotacao[onibus_id]) / len(list_lotacao[onibus_id])
     return round(media_onibus)
 
+@login_required
 def update_onibus(request, onibus_id):
     bus = get_object_or_404(onibus, pk=onibus_id)
 

@@ -4,7 +4,11 @@ from .models import pontos, onibus, usuario
 
 from django.http import HttpResponse
 from .temp_data import busflow_data
+from django.views import generic
 
+class PontosListView(generic.ListView):
+    model = pontos
+    template_name = 'busflow/index.html'
 
 def detail_ponto(request, ponto_id):
     ponto = get_object_or_404(pontos, pk=ponto_id)

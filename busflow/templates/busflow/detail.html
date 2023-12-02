@@ -10,4 +10,23 @@ ponto.lotacao }} {% endblock title %} {% block content %}
   </ul>
 </section>
 
+<hr>
+
+<section>
+    <header>
+        <h3>Onibus</h3>
+    </header>
+    <ul>
+        {% if  ponto.id_onibus %}
+                <figure>
+                    <blockquote>
+                        Proximo onibus: {{ ponto.id_onibus }}
+                    </blockquote>
+                </figure>
+        {% else %}
+            <p>Sem previsao de onibus.</p>
+        {% endif %}
+    </ul>
+</section>
+
 {% endblock content %}

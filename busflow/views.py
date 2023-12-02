@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 import numpy as np
 from .models import pontos, onibus, usuario
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 
 from django.http import HttpResponse
 from .temp_data import busflow_data
@@ -46,36 +48,29 @@ def search_pontos(request):
         context = {"pontos_list": pontos_list}
     return render(request, "busflow/search.html", context)
 
+list_lotacao = []
+t=len(pontos.objects.all())
+for i in range(t):
+    list_lotacao.append([])
+def mediaLotacao(lot, ponto_id):
+    print(list_lotacao)
+    list_lotacao[ponto_id].append(int(lot))
+    print(list_lotacao)
+    print(sum(list_lotacao[ponto_id]))
+    print(len(list_lotacao[ponto_id]))
+    media = sum(list_lotacao[ponto_id]) / len(list_lotacao[ponto_id])
+    return round(media)
 
-# list_lotacao = np.zeros(26)
-
-
-# def mediaLotacao(request, ponto_id):
-#     list_lotacao[ponto_id].append(request.POST["lotacao"])
-#     media = sum(list_lotacao[ponto_id]) / float(len(list_lotacao[ponto_id]))
-#     return round(media)
-
-
-# def modify_lotacao(request):
-#     if request.method == 'UPDATE':
-#         media=mediaLotacao(request)
-#         busflow_data.append({
-#             'lotacao': request.POST.set[media],
-#             })
-#         return HttpResponseRedirect(
-#             reverse('movies:detail', args=(len(movie_data), )))
-#     else:
-#         return render(request, 'movies/create.html', {})
 
 def update_ponto(request, ponto_id):
     ponto = get_object_or_404(pontos, pk=ponto_id)
 
     if request.method == "POST":
-        # ponto.lotacao = request.POST['mediaLotacao(request, ponto_id)']
-        ponto.lotacao = request.POST['lotacao']
+        media = mediaLotacao(request.POST['lotacao'], ponto_id)
+        ponto.lotacao = media
         ponto.save()
         return HttpResponseRedirect(
-            reverse("busflow:detail", args=(ponto.id )))
+            reverse("busflow:detail", args=(ponto.id, )))
     
     context = {'ponto': ponto}
     return render(request, 'busflow/update.html', context)

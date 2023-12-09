@@ -7,6 +7,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')), # adicionar esta linha
     path('accounts/', include('django.contrib.auth.urls')), # adicione esta linha
-
+    # path('api/v1/', include('api.urls')),
 
 ]

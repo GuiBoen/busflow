@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'staticpages.apps.StaticpagesConfig', # adicione esta linha
     'busflow.apps.BusflowConfig', # adicione esta linha
     'accounts.apps.AccountsConfig',
+    "corsheaders",
+    'rest_framework',
+    'api.apps.ApiConfig', # adicione esta linha
 ]
 
 MIDDLEWARE = [
@@ -54,8 +57,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware', # adicione esta linha
-]
+    'corsheaders.middleware.CorsMiddleware', # adicione esta linha
 
+]
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
 ROOT_URLCONF = 'uspbusflow.urls'
 
 TEMPLATES = [

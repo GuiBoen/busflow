@@ -10,6 +10,6 @@ urlpatterns = [
     path('update/<int:ponto_id>/', views.update_ponto, name="update"), #
     path('update_onibus/<int:onibus_id>/', views.update_onibus, name="update_onibus"), #
     path("detail_onibus/<int:onibus_id>/", views.detail_onibus, name="detail_onibus"),  # adicione esta linha
-
+    path('import/', views.import_ponto, name='import'),
 
 ]

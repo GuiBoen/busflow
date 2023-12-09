@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form action="{% url 'busflow:import' %}" method="post">
+    {% csrf_token %}
+    <p>
+        <label for="id_ponto_id">ID do filme:</label>
+        <input type="number" name="movie_id" id="id_movie_id" />
+    </p>
+</form>
+
+{% endblock content %}

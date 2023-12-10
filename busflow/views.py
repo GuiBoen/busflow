@@ -18,15 +18,14 @@ for j in horarios32:
     lista_horarios.append(j.horario)
 
 def calctempo(tempo_proximo):
-    aux=lista_horarios[0]
     hora_atual = datetime.now()
+    time = None
     for i in lista_horarios:
-        aux = datetime.combine(datetime.today(), aux)
-        proximo = aux + timedelta(minutes=tempo_proximo)
-        diferenca = hora_atual - timedelta(hours=proximo.hour, minutes=proximo.minute) 
-        if diferenca.hour < hora_atual.hour or ((diferenca.hour == hora_atual.hour) and (diferenca.minute < hora_atual.minute)): 
+        time = datetime.combine(datetime.today(), i)
+        proximo = time + timedelta(minutes=tempo_proximo)
+        diferenca = proximo - timedelta(hours=hora_atual.hour, minutes=hora_atual.minute) 
+        if diferenca.hour > hora_atual.hour or ((diferenca.hour == hora_atual.hour) and (diferenca.minute > hora_atual.minute)): 
             return diferenca 
-        aux = i
          
 def fazvetor(v):
     n=[]
@@ -38,9 +37,9 @@ def fazvetor(v):
 
 def tempo(ponto, bus):
     listapontos = fazvetor(bus.id_linha.List_id_pontos)
-    indice = listapontos.index(ponto.id)
+    print(listapontos)
+    indice = listapontos.index(ponto.id-1)
     tempo_proximo = indice * 5
-    print('\n', tempo_proximo, '\n')
     return calctempo(tempo_proximo)
     
 

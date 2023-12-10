@@ -18,12 +18,11 @@ ponto.lotacao }} {% endblock title %} {% block content %}
     </header>
     <ul>
 
-        <p>{{time}}</p>
+        <p>Proximo onibus passa em: {{time.hour}}h:{{time.minute}}min</p>
         {% if  ponto.id_onibus %}
                 <figure>
                     <blockquote>
                         <a href="{% url 'busflow:update_onibus' ponto.id_onibus.id %}">Proximo onibus: {{ ponto.id_onibus }}</a>
-                        <p>{{bus.lotacao}}</p>
                     </blockquote>
                 </figure>
         {% else %}

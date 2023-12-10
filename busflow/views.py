@@ -24,7 +24,7 @@ def calctempo(tempo_proximo):
         time = datetime.combine(datetime.today(), i)
         proximo = time + timedelta(minutes=tempo_proximo)
         diferenca = proximo - timedelta(hours=hora_atual.hour, minutes=hora_atual.minute) 
-        if diferenca.hour > hora_atual.hour or ((diferenca.hour == hora_atual.hour) and (diferenca.minute > hora_atual.minute)): 
+        if diferenca.day == hora_atual.day: 
             return diferenca 
          
 def fazvetor(v):

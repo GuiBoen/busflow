@@ -37,7 +37,6 @@ def fazvetor(v):
 
 def tempo(ponto, bus):
     listapontos = fazvetor(bus.id_linha.List_id_pontos)
-    print(listapontos)
     indice = listapontos.index(ponto.id-1)
     tempo_proximo = indice * 5
     return calctempo(tempo_proximo)

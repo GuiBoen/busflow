@@ -39,7 +39,7 @@ def tempo(ponto, bus):
     listapontos = fazvetor(bus.id_linha.List_id_pontos)
     indice = listapontos.index(ponto.id-1)
     tempo_proximo = indice * 5
-    return calctempo(tempo_proximo)
+    return calctempo(tempo_proximo) + timedelta(minutes=bus.lotacao)
     
 
 def detail_ponto(request, ponto_id):

@@ -1,5 +1,5 @@
-{% extends 'base.html' %} {% block title %} {{ ponto.nome }} ({{
-ponto.lotacao }} {% endblock title %} {% block content %}
+{% extends 'base.html' %} {% block title %} 
+{{ ponto.nome }} ({{ponto.lotacao }}) {% endblock title %} {% block content %}
 <h2>Detalhes do Ponto {{ ponto.nome }} ({{ ponto.lotacao }})</h2>
 
 <section class="dados-de-ponto">
@@ -22,7 +22,7 @@ ponto.lotacao }} {% endblock title %} {% block content %}
                 <figure>
                     <p>Proximo onibus passa em: {{time.hour}}h:{{time.minute}}min</p>
                     <blockquote>
-                        <a href="{% url 'busflow:update_onibus' ponto.id_onibus.id %}">Proximo onibus: {{ ponto.id_onibus }}</a>
+                        <a href="{% url 'busflow:update_onibus' ponto.id_onibus.id %}">{{ ponto.id_onibus }}</a>
                     </blockquote>
                 </figure>
         {% else %}

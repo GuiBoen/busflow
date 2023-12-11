@@ -1,12 +1,26 @@
 {% extends 'base.html' %} {% block title %} 
 {{ ponto.nome }} ({{ponto.lotacao }}) {% endblock title %} {% block content %}
-<h2>Detalhes do Ponto {{ ponto.nome }} ({{ ponto.lotacao }})</h2>
+<div class="titulo">
+    <h2>Detalhes do Ponto {{ ponto.nome }} </h2>
+    {% if ponto.lotacao == 1 %}
+    <h1 class="pontolotacao ponto-1"></h1>
+        {% elif ponto.lotacao == 2 %}
+    <h1 class="pontolotacao ponto-2"></h1>
+        {% elif ponto.lotacao == 3 %}
+    <h1 class="pontolotacao ponto-3"></h1>
+        {% elif ponto.lotacao == 4 %}
+    <h1 class="pontolotacao ponto-4"></h1>
+        {% elif ponto.lotacao == 5 %}
+    <h1 class="pontolotacao ponto-5"></h1>
+    {% endif %}
 
+</div>
 <section class="dados-de-ponto">
   <ul>
-    <li>Nome: {{ ponto.nome }}</li>
-    <li>Lotação: {{ ponto.lotacao }}</li>
     <li><a href="{% url 'busflow:update' ponto.id %}">Editar lotacao</a></li>
+    <div class="titulo">
+        <p>Vazio(1)</p><h1 class="ponto-1"></h1><h1 class="ponto-2"></h1><h1 class="ponto-3"></h1><h1 class="ponto-4"></h1><h1 class="ponto-5"></h1><p>Cheio(5)</p>
+    </div>
   </ul>
 </section>
 
@@ -20,10 +34,25 @@
 
         {% if  ponto.id_onibus %}
                 <figure>
+                   
                     <p>Proximo onibus passa em: {{time.hour}}h:{{time.minute}}min</p>
-                    <blockquote>
+                    <div class="aux">
                         <a href="{% url 'busflow:update_onibus' ponto.id_onibus.id %}">{{ ponto.id_onibus }}</a>
-                    </blockquote>
+                        <div class="titulo">
+                            {% if bus.lotacao == 1 %}
+                            <h1 class="pontolotacao ponto-1"></h1>
+                                {% elif bus.lotacao == 2 %}
+                            <h1 class="pontolotacao ponto-2"></h1>
+                                {% elif bus.lotacao == 3 %}
+                            <h1 class="pontolotacao ponto-3"></h1>
+                                {% elif bus.lotacao == 4 %}
+                            <h1 class="pontolotacao ponto-4"></h1>
+                                {% elif bus.lotacao == 5 %}
+                            <h1 class="pontolotacao ponto-5"></h1>
+                            {% endif %}
+                          </div>
+
+                    </div>
                 </figure>
         {% else %}
             <p>Sem previsao de onibus.</p>

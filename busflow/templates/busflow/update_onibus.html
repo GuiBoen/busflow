@@ -1,6 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Atualizar Dados do Onibus {{ bus.id_linha }} ({{ bus.lotacao}})</h2>
+<div class="titulo">
+  <h2>  Lotação do onibus {{ bus.idlinha}} </h2>
+  {% if bus.lotacao == 1 %}
+  <h1 class="pontolotacao ponto-1"></h1>
+      {% elif bus.lotacao == 2 %}
+  <h1 class="pontolotacao ponto-2"></h1>
+      {% elif bus.lotacao == 3 %}
+  <h1 class="pontolotacao ponto-3"></h1>
+      {% elif bus.lotacao == 4 %}
+  <h1 class="pontolotacao ponto-4"></h1>
+      {% elif bus.lotacao == 5 %}
+  <h1 class="pontolotacao ponto-5"></h1>
+  {% endif %}
+
+</div>
+<h2>Atualizar Dados do Onibus {{ bus.id_linha }}</h2>
 <form method="post" action="{% url 'busflow:update_onibus' bus.id%}">
   {% csrf_token %}
   <p>

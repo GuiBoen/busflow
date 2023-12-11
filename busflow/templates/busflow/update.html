@@ -1,6 +1,21 @@
 {% extends 'base.html' %}
 {% block content %}
-<h2>Atualizar Dados do Ponto {{ ponto.nome }} ({{ ponto.lotacao}})</h2>
+<div class="titulo">
+  <h2>Lotação do Ponto {{ ponto.nome }} </h2>
+  {% if ponto.lotacao == 1 %}
+  <h1 class="pontolotacao ponto-1"></h1>
+      {% elif ponto.lotacao == 2 %}
+  <h1 class="pontolotacao ponto-2"></h1>
+      {% elif ponto.lotacao == 3 %}
+  <h1 class="pontolotacao ponto-3"></h1>
+      {% elif ponto.lotacao == 4 %}
+  <h1 class="pontolotacao ponto-4"></h1>
+      {% elif ponto.lotacao == 5 %}
+  <h1 class="pontolotacao ponto-5"></h1>
+  {% endif %}
+
+</div>
+<h2>Atualizar Dados do Ponto {{ ponto.nome }}</h2>
 <form method="post" action="{% url 'busflow:update' ponto.id%}">
   {% csrf_token %}
   <p>

@@ -10,7 +10,7 @@
   {% for ponto in pontos_list %}
   <article class="card">
     <a href="{% url 'busflow:detail' ponto.id %}">
-      <p>{{ ponto.nome }} ({{ ponto.lotacao }})</p>
+      <p>{{ ponto.nome }}</p>
     </a>
   </article>
   {% endfor %}

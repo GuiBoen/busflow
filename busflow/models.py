@@ -21,7 +21,7 @@ class onibus(models.Model):
     id_linha = models.ForeignKey(linhas, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.id_linha} ({self.lotacao})'
+        return f'{self.id_linha}'
 
 class pontos(models.Model):
     nome = models.CharField(max_length=255)

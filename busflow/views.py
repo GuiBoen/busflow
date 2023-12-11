@@ -127,7 +127,7 @@ def update_onibus(request, onibus_id):
         bus.lotacao = media
         bus.save()
         return HttpResponseRedirect(
-            reverse("busflow:detail_onibus", args=(bus.id, )))
+            reverse("busflow:index",))
     
     context = {'bus': bus}
     return render(request, 'busflow/update_onibus.html', context)    
